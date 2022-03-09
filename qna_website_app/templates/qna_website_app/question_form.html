@@ -1,0 +1,13 @@
+
+{% extends 'qna_website_app/main_theme.html' %}
+{% block content %}
+
+<h3>Questions Modify</h3>
+<a href="{% url 'questions' %}">Go Back</a>
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}

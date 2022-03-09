@@ -1,0 +1,15 @@
+
+{% extends 'qna_website_app/main_theme.html' %}
+{% block content %}
+
+<h1>NewUser</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register">
+</form>
+
+<p>If you already have an account, click <a href="{% url 'login' %}">here</a> to login.</p>
+
+{% endblock content %}
