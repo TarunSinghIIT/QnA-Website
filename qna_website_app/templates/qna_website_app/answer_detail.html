@@ -13,12 +13,14 @@ Add an Answer:<br>
 </form>
 <br>
 Other Answers:
-<br><br>
-{{answer.answer_text}}
-<br>
-Upvotes:
-{{answer.upvotes}}  
-<br>
-Downvotes:
-{{answer.downvotes}}
+{% for answer in answerstothisquestion %}
+    <br><br>
+    {{answer.answer_text}}
+    <br>
+    Upvotes:
+    {{answer.upvotes}}  
+    <br>
+    Downvotes:
+    {{answer.downvotes}}
+{% endfor %}
 {% endblock content %}

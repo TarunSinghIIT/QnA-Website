@@ -65,7 +65,11 @@ class QuestionAdd(LoginRequiredMixin,CreateView):
 class QuestionInfo(LoginRequiredMixin,DetailView):
     model = Answer
     fields = ['question_title','answer_text', 'upvotes', 'downvotes']
-    template = 'qna_website_app/question_info.html'
+    template = 'qna_website_app/answer_detail.html'
+
+    def answer_detail(request):
+        answerstothisquestion = Answer.objects.prefetch_related('question')
+        return render(request, 'answer_detail.html', {'answerstothisquestion':answerstothisquestion})
 
 class QuestionChange(LoginRequiredMixin,UpdateView):
     model = Question
@@ -75,4 +79,11 @@ class QuestionChange(LoginRequiredMixin,UpdateView):
 class QuestionDelete(LoginRequiredMixin,DeleteView):
     model = Question
     context_object_name = 'question'
-    success_url = reverse_lazy('questions')    
+    success_url = reverse_lazy('questions')
+
+class AllAnswers(LoginRequiredMixin, ListView):
+    model = Answer
+    context_object_name = 'answers'
+    template_name = 'qna_website_app/all_answers.html'
+    def get_success_url(self):
+        return reverse_lazy('answers')
