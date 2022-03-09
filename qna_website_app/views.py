@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+from re import template
+=======
+>>>>>>> 56655dafb6026582ecc637bb85405ff2a67d6dc0
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
@@ -64,7 +68,12 @@ class QuestionAdd(LoginRequiredMixin,CreateView):
 
 class QuestionInfo(LoginRequiredMixin,DetailView):
     model = Answer
+<<<<<<< HEAD
+    fields = ['question_title','answer_text', 'upvotes', 'downvotes']
+    template = 'qna_website_app/question_info.html'
+=======
     fields = ['answer_text', 'upvotes', 'downvotes']
+>>>>>>> 56655dafb6026582ecc637bb85405ff2a67d6dc0
 
 class QuestionChange(LoginRequiredMixin,UpdateView):
     model = Question
