@@ -1,0 +1,9 @@
+
+{% extends 'qna_website_app/main_theme.html' %}
+{% block content %}
+
+<h3>Questions Details</h3>
+<a href="{% url 'all_questions' %}">Go Back</a>
+{{answer.answer_text}}
+
+{% endblock content %}

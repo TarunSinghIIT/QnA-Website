@@ -1,0 +1,11 @@
+{% extends 'qna_website_app/main_theme.html' %}
+{% block content %}
+
+<a href="{% url 'questions' %}">Go Back</a>
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this item? "{{question}}"</p>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock content %}
