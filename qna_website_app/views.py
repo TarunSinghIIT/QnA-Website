@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from .models import Answer, Question
@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.template import loader
 from django.contrib.auth import login
 from django.shortcuts import redirect, render
+from django.urls import reverse
+from .forms import AnswerForm
 
 def questionlist(request):
     question_list = Question.objects.all()
@@ -60,6 +62,19 @@ class NewUser(FormView):
             return redirect('questions')
         return super(NewUser, self).get(*args, **kwargs)
 
+def answeradd(request, question_id):
+    question = Question.objects.get(id=question_id)
+    if request.method=='POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer=Answer()
+            answer.answer_text = form.cleaned_data.get('answer_text')
+            answer.question = question
+            answer.save()
+    else:
+        form = AnswerForm()
+    return render(request, 'qna_website_app/answer_form.html', {'form':form})
+
 class QuestionAdd(LoginRequiredMixin,CreateView):
     model = Question
     fields = ['question_title', 'question_text']
@@ -73,19 +88,6 @@ def questioninfo(request, question_id):
     question = Question.objects.get(id=question_id)
     answer = question.answer_set.all()
     return render(request, 'qna_website_app/answer_detail.html', {'question': question, 'answer': answer})
-
-class QuestionInfo(LoginRequiredMixin,DetailView):
-    model = Answer
-    context_object_name = 'answers'
-    fields = ['question_title','answer_text', 'upvotes', 'downvotes']
-
-    def answer_detail(request, question):
-        answers = Answer.objects.prefetch_related(question)
-        return render(request, 'answer_detail.html', {'answers':answers})
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['answers'] = context['answers'].filter(question_id=2)
-        return context
 
 class QuestionChange(LoginRequiredMixin,UpdateView):
     model = Question
@@ -108,10 +110,6 @@ class AllAnswers(LoginRequiredMixin, ListView):
         context['answers'] = context['answers'].filter(question_id=2)
         return context
 
-class AnswerInfo(LoginRequiredMixin,DetailView):
-    model = Answer
-    template = 'qna_website_app/answer_detail.html'
-    context_object_name = 'answers'
-    def answer_detail(request):
-        answers = Answer.objects.prefetch_related('question')
-        return render(request, 'answer_detail.html', {'answers':answers})
+def answerinfo(request, answer_id):
+    answer = Answer.objects.get(id=answer_id)
+    return render(request, 'qna_website_app/answer_info.html', {'answer': answer})

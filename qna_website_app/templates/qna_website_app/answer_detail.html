@@ -5,13 +5,7 @@
 <a href="{% url 'all_questions' %}">Go Back</a>
 <br><br>
 Add an Answer:<br>
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form.as_p}}
-    <textarea id="answer" name="answer_text" rows="6" cols="100"></textarea><br>
-    <input type="submit" value="Submit">
-</form>
-<br>
+<a id="add-link" href="{% url 'answeradd' question.id %}">&#x2b;</a>
 
 <h3>Here are the answers to this question by other users:</h3>
 
