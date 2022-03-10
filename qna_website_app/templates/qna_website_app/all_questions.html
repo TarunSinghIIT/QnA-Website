@@ -16,7 +16,7 @@
 </div>
 
 <div class="task-items-wrapper">
-    {% for question in questions %}
+    {% for question in question_list %}
         <div class="task-wrapper">
             <div class="task-title">
                 <a href="{% url 'question' question.id %}">{{question.question_title}}</a>
