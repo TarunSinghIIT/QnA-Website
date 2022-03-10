@@ -12,15 +12,17 @@ Add an Answer:<br>
     <input type="submit" value="Submit">
 </form>
 <br>
-Other Answers:
-{% for answer in answerstothisquestion %}
-    <br><br>
-    {{answer.answer_text}}
-    <br>
-    Upvotes:
-    {{answer.upvotes}}  
-    <br>
-    Downvotes:
-    {{answer.downvotes}}
+
+<h3>Here are the answers to this question by other users:</h3>
+
+{% for zanswer in answer%}
+    <div class="task-wrapper">
+        <div class="task-title">
+            <a href="{% url 'answer' zanswer.id %}">{{zanswer.answer_text}}</a>
+        </div>
+    </div>
+
+{% empty %}
+<h3>No Answers</h3>
 {% endfor %}
 {% endblock content %}
