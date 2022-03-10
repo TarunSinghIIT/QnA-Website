@@ -3,9 +3,9 @@
 {% block content %}
 
 <h3>Give Answer</h3>
-<a href="{% url 'questions' %}">Go Back</a>
+<a href="{% url 'question' question.id %}">Go Back</a><hr>
 <form method="POST" action="">
-    Enter Your Answer:
+    Enter Your Answer:<br>
     {% csrf_token %}
     {{form}}
     <input type="submit" name="Submit">

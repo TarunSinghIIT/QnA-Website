@@ -2,10 +2,10 @@
 {% block content %}
 
 <h3>Answers Details</h3>
-<a href="{% url 'question' answer.question.id %}">Go Back</a>
-{{answer.answer_text}}<br>
+<a href="{% url 'question' answer.question.id %}">Go Back</a><br>
+Answer:<br>
+{{answer.answer_text}}<br><br><br>
+Answered On: <br>
 {{answer.answer_date}}<br>
-{{answer.upvotes}}<br>
-{{answer.downvotes}}<br>
 
 {% endblock content %}

@@ -2,17 +2,22 @@
 {% block content %}
 
 <h3>Answers to the question</h3>
-<a href="{% url 'all_questions' %}">Go Back</a>
-<br><br>
+<a href="{% url 'all_questions' %}">Go Back</a><hr>
+<br>
+Question Title: {{question.question_title}}<br>
+Question Detail: {{question.question_text}}<br><hr>
 Add an Answer:<br>
-<a id="add-link" href="{% url 'answeradd' question.id %}">&#x2b;</a>
+<a id="add-link" href="{% url 'answeradd' question.id %}">&#x2b;</a><br>
+<hr>
 
-<h3>Here are the answers to this question by other users:</h3>
+<b><i>Here are the answers to this question by other users:</i></b>
 
 {% for zanswer in answer%}
     <div class="task-wrapper">
         <div class="task-title">
-            <a href="{% url 'answer' zanswer.id %}">{{zanswer.answer_text}}</a>
+            Answered By: {{zanswer.question.user}}<br>
+            Answered On: {{zanswer.answer_date}}<br><br>
+            Answer: {{zanswer.answer_text}}<br>
         </div>
     </div>
 

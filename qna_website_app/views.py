@@ -73,7 +73,7 @@ def answeradd(request, question_id):
             answer.save()
     else:
         form = AnswerForm()
-    return render(request, 'qna_website_app/answer_form.html', {'form':form})
+    return render(request, 'qna_website_app/answer_form.html', {'form':form, 'question':question})
 
 class QuestionAdd(LoginRequiredMixin,CreateView):
     model = Question
