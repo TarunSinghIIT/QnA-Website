@@ -4,10 +4,14 @@
 
 <h3>Questions Modify</h3>
 <a href="{% url 'questions' %}">Go Back</a>
+<div class="task-items-wrapper">
+
 <form method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Submit">
 </form>
+
+</div>
 
 {% endblock content %}

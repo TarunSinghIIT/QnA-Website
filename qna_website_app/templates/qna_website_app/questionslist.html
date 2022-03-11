@@ -16,25 +16,17 @@
 </div>
 <div id="search-add-wrapper">
     <a id="add-link" href="{% url 'question_add' %}">&#x2b;</a>
-    <a href="{% url 'all_questions' %}"> All Questions</a>
+    <a id="logoutandlogin" href="{% url 'all_questions' %}"> All Questions</a>
 </div>
 
 
 <div class="task-items-wrapper">
     {% for question in questions %}
         <div class="task-wrapper">
-            {% if task.complete %}
-            <div class="task-title">
-                <i><s><a href="{% url 'question_change' question.id %}">{{question.question_title}}</a></s></i>
-            </div>
-            <a class="delete-link" href = "{% url 'question_delete' question.id %}">&#215;</a>
-            {% else %}
             <div class="task-title">
                 <a href="{% url 'question_change' question.id %}">{{question.question_title}}</a>
             </div>
-            <a class="delete-link" href = "{% url 'question_delete' question.id %}">&#215;</a>
-            {% endif %}
-            
+            <a class="delete-link" href = "{% url 'question_delete' question.id %}">&#215;</a>            
         </div>
 
     {% empty %}
